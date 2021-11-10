@@ -1,0 +1,54 @@
+{
+  "name": "voodoo-apm",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "bin": "./index.js",
+  "types": "./index.d.ts",
+  "exports": {
+    "require": "./index.js",
+    "import": "./index.js"
+  },
+  "files": [
+    "src/**"
+  ],
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "keywords": [
+    "apm",
+    "prometheus",
+    "eventloop",
+    "gc",
+    "cpu",
+    "memory"
+  ],
+  "homepage": "https://github.com/VoodooTeam/voodoo-apm",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VoodooTeam/voodoo-apm.git"
+  },
+  "scripts": {
+    "types": "tsc -p tsconfig.json",
+    "test": "./node_modules/.bin/jest",
+    "linter": "./node_modules/.bin/eslint -c ./.eslintrc ./",
+    "all": "npm run lint && npm run test"
+  },
+  "author": {
+    "name": "Vincent Vallet",
+    "email": "wallet77@gmail.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "prom-client": "14.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "jest": "^27.1.0",
+    "typescript": "^4.3.2"
+  }
+}
