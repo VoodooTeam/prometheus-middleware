@@ -1,6 +1,22 @@
 const client = require('prom-client')
 const http = require('http')
 
+const AsyncHooks = require('async_hooks')
+
+const Context = require('./context')
+
+const hook = AsyncHooks.createHook({
+    init (asyncId, type, triggerAsyncId) {
+        Context.init(asyncId, type, triggerAsyncId)
+    },
+    destroy (asyncId) {
+        // destroy everything in map/array to prevent memory leak
+        Context.destroy(asyncId)
+    }
+})
+
+hook.enable()
+
 const requestListener = async (req, res) => {
     if (req.url === '/metrics') {
         try {
