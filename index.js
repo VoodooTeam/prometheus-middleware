@@ -36,13 +36,19 @@ class APM {
     constructor (config = {}) {
         this.config = config
         this.client = client
+        this.server = null
     }
 
     init () {
         const collectDefaultMetrics = client.collectDefaultMetrics
         collectDefaultMetrics()
-        const server = http.createServer(requestListener)
-        server.listen(this.config.PORT || 9050)
+        this.server = http.createServer(requestListener)
+        this.server.listen(this.config.PORT || 9050)
+    }
+
+    destroy () {
+        this.server.close()
+        hook.disable()
     }
 }
 
