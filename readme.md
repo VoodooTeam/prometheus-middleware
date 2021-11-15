@@ -1,4 +1,4 @@
-# Node.js simple agent
+# Node.js simple APM to expose prometheus metrics
 
 # Purpose
 
