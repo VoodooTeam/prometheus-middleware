@@ -17,6 +17,11 @@ Supported and tested : >= 14.0
 | 14.x          | yes           | yes            |
 | 16.x          | yes           | yes            |
 
+It works with different HTTP server:
+- [default Node.js HTTP server](https://nodejs.org/api/http.html#class-httpserver)
+- [express](https://expressjs.com/)
+- [fastify](https://www.fastify.io/)
+
 # Installation
 
 ```console
