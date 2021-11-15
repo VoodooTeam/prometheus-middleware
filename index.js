@@ -2,9 +2,10 @@ const client = require('prom-client')
 const http = require('http')
 
 const HTTPHook = require('./http_hook')
+let METRICS_ROUTE = '/metrics'
 
 const requestListener = async (req, res) => {
-    if (req.url === '/metrics') {
+    if (req.url === METRICS_ROUTE) {
         try {
             res.writeHead(200, { 'Content-Type': client.register.contentType })
             return res.end(await client.register.metrics())
@@ -26,6 +27,7 @@ class APM {
     }
 
     init () {
+        METRICS_ROUTE = this.config.METRICS_ROUTE || METRICS_ROUTE
         // --------------------------------------------------------------
         // Create HTTP hook
         // --------------------------------------------------------------
