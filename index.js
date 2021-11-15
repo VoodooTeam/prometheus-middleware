@@ -1,9 +1,7 @@
 const client = require('prom-client')
 const http = require('http')
 
-const AsyncHooks = require('async_hooks')
-
-const Context = require('./context')
+const HTTPHook = require('./http_hook')
 
 const requestListener = async (req, res) => {
     if (req.url === '/metrics') {
@@ -29,19 +27,9 @@ class APM {
 
     init () {
         // --------------------------------------------------------------
-        // async hooks stuff
+        // Create HTTP hook
         // --------------------------------------------------------------
-        this.hook = AsyncHooks.createHook({
-            init (asyncId, type, triggerAsyncId) {
-                Context.init(asyncId, type, triggerAsyncId)
-            },
-            destroy (asyncId) {
-                // destroy everything in map/array to prevent memory leak
-                Context.destroy(asyncId)
-            }
-        })
-
-        this.hook.enable()
+        HTTPHook.init(client)
 
         // --------------------------------------------------------------
         // prometheus stuff
@@ -54,7 +42,6 @@ class APM {
 
     destroy () {
         this.server.close()
-        this.hook.disable()
     }
 }
 
