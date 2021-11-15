@@ -5,18 +5,6 @@ const AsyncHooks = require('async_hooks')
 
 const Context = require('./context')
 
-const hook = AsyncHooks.createHook({
-    init (asyncId, type, triggerAsyncId) {
-        Context.init(asyncId, type, triggerAsyncId)
-    },
-    destroy (asyncId) {
-        // destroy everything in map/array to prevent memory leak
-        Context.destroy(asyncId)
-    }
-})
-
-hook.enable()
-
 const requestListener = async (req, res) => {
     if (req.url === '/metrics') {
         try {
@@ -40,6 +28,24 @@ class APM {
     }
 
     init () {
+        // --------------------------------------------------------------
+        // async hooks stuff
+        // --------------------------------------------------------------
+        this.hook = AsyncHooks.createHook({
+            init (asyncId, type, triggerAsyncId) {
+                Context.init(asyncId, type, triggerAsyncId)
+            },
+            destroy (asyncId) {
+                // destroy everything in map/array to prevent memory leak
+                Context.destroy(asyncId)
+            }
+        })
+
+        this.hook.enable()
+
+        // --------------------------------------------------------------
+        // prometheus stuff
+        // --------------------------------------------------------------
         const collectDefaultMetrics = client.collectDefaultMetrics
         collectDefaultMetrics()
         this.server = http.createServer(requestListener)
@@ -48,7 +54,7 @@ class APM {
 
     destroy () {
         this.server.close()
-        hook.disable()
+        this.hook.disable()
     }
 }
 
