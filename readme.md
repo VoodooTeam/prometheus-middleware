@@ -34,7 +34,17 @@ apm.init()
 
 ## Add a custom metric
 ```javascript
-TODO
+const APM = require('voodoo-apm')
+const apm = new APM()
+apm.init()
+// ----------------
+const counter = new apm.client.Counter({
+  name: 'metric_name',
+  help: 'metric_help',
+})
+// ----------------
+counter.inc(); // Increment by 1
+counter.inc(10); // Increment by 10
 ```
 
 # Debug
