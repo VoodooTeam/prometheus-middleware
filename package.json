@@ -31,7 +31,7 @@
   "scripts": {
     "types": "tsc -p tsconfig.json",
     "test": "./node_modules/.bin/jest",
-    "linter": "./node_modules/.bin/eslint -c ./.eslintrc ./",
+    "lint": "./node_modules/.bin/eslint -c ./.eslintrc ./",
     "all": "npm run lint && npm run test"
   },
   "author": {
