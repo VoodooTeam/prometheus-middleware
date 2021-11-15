@@ -42,6 +42,7 @@ class APM {
 
     destroy () {
         this.server.close()
+        this.client.register.clear()
     }
 }
 
