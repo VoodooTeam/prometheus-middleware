@@ -1,4 +1,4 @@
-# Node.js simple APM to expose prometheus metrics
+# Node.js simple middleware to expose prometheus metrics
 
 # Purpose
 
@@ -25,21 +25,21 @@ It works with different HTTP server:
 # Installation
 
 ```console
-$ npm install voodoo-apm --save
+$ npm install prometheus-middleware --save
 ```
 
 # Usage
 
 ## Basic
 ```javascript
-const APM = require('voodoo-apm')
+const APM = require('prometheus-middleware')
 const apm = new APM()
 apm.init()
 ```
 
 ## Add a custom metric
 ```javascript
-const APM = require('voodoo-apm')
+const APM = require('prometheus-middleware')
 const apm = new APM()
 apm.init()
 // ----------------
@@ -58,7 +58,7 @@ The agent use debug module in order not to pollute your logs.
 If you want to see all agent output just use DEBUG environment variable:
 
 ```console
-DEBUG=voodoo-apm* node myApp.js
+DEBUG=prometheus-middleware* node myApp.js
 ```
 
 # Test

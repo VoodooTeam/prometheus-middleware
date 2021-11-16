@@ -1,5 +1,5 @@
 {
-  "name": "voodoo-apm",
+  "name": "prometheus-middleware",
   "version": "0.1.0",
   "description": "",
   "main": "index.js",
@@ -23,10 +23,10 @@
     "cpu",
     "memory"
   ],
-  "homepage": "https://github.com/VoodooTeam/voodoo-apm",
+  "homepage": "https://github.com/VoodooTeam/prometheus-middleware",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/VoodooTeam/voodoo-apm.git"
+    "url": "git+https://github.com/VoodooTeam/prometheus-middleware.git"
   },
   "scripts": {
     "types": "tsc -p tsconfig.json",
