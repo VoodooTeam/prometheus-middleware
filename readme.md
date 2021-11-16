@@ -4,8 +4,6 @@
 [![Opened issues](https://img.shields.io/github/issues-raw/VoodooTeam/prometheus-middleware.svg)](https://github.com/VoodooTeam/prometheus-middleware/issues)
 [![Opened PR](https://img.shields.io/github/issues-pr-raw/VoodooTeam/prometheus-middleware.svg)](https://github.com/VoodooTeam/prometheus-middleware/pulls)
 [![Code coverage](https://codecov.io/gh/VoodooTeam/prometheus-middleware/branch/master/graph/badge.svg)](https://codecov.io/gh/VoodooTeam/prometheus-middleware)
-[![Dependencies updates](https://img.shields.io/david/VoodooTeam/prometheus-middleware.svg)](https://github.com/VoodooTeam/prometheus-middleware)
-[![Dev Dependencies updates](https://img.shields.io/david/dev/VoodooTeam/prometheus-middleware.svg)](https://github.com/VoodooTeam/prometheus-middleware)
 [![Node version](https://img.shields.io/node/v-lts/prometheus-middleware.svg)](https://github.com/VoodooTeam/prometheus-middleware)
 
 # Node.js simple middleware to expose prometheus metrics
