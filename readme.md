@@ -4,6 +4,7 @@
 
 Agent to create an HTTP server to expose prometheus metrics.  
 By default it:
+- runs an HTTP server to expose metrics
 - instantiates and returns a [prom-client](https://www.npmjs.com/package/prom-client)
 - patch http server to get request response time
 - allows to define custom metrics through prom-client
