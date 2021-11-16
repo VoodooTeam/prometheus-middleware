@@ -1,19 +1,19 @@
 'use strict'
 const Http = require('http')
 
-const init = function (client) {
+const init = function (client, config) {
     const opts = {
         histogram: {
             name: 'http_request_duration_seconds',
             help: 'request duration in seconds',
             labelNames: ['status', 'method', 'route'],
-            buckets: [0.05, 0.1, 0.5, 1, 3, 5, 10]
+            buckets: config.HTTP_DURATION_BUCKETS || [0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1, 2]
         },
         summary: {
             name: 'http_request_summary_seconds',
             help: 'request duration in seconds summary',
             labelNames: ['status', 'method', 'route'],
-            percentiles: [0.5, 0.9, 0.95, 0.99]
+            percentiles: config.HTTP_SUMMARY_PERCENTILES || [0.5, 0.9, 0.95, 0.99]
         }
     }
 

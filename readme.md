@@ -71,18 +71,22 @@ The config is an JSON object which accepts the following property:
 ```javascript
 const APM = require('prometheus-middleware')
 const apm = new APM({
-  METRICS_ROUTE: "Route to expose the metrics",
-  PORT: "Port to listen metrics",
-  PROM_CLIENT_CONF: "Configuration of the prom-client lib"
+  METRICS_ROUTE: "/metrics",
+  PORT: 9350,
+  PROM_CLIENT_CONF: {},
+  HTTP_DURATION_BUCKETS: [0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1, 2]
+  HTTP_SUMMARY_PERCENTILES: [0.5, 0.9, 0.95, 0.99]
 })
 apm.init()
 ```
 
-| Property          | Default       | Description                           |
-|:------------------|:--------------|:--------------------------------------|
-| METRICS_ROUTE     | /metrics      | Route to expose the metrics           |
-| PORT              | 9350          | Port to listen metrics                |
-| PROM_CLIENT_CONF  | {}            | Configuration of the prom-client lib  |     
+| Property                  | Default                                 | Description                                  |
+|:--------------------------|:----------------------------------------|:---------------------------------------------|
+| METRICS_ROUTE             | /metrics                                | Route to expose the metrics                  |
+| PORT                      | 9350                                    | Port to listen metrics                       |
+| PROM_CLIENT_CONF          | {}                                      | Configuration of the prom-client lib         |
+| HTTP_DURATION_BUCKETS     | [0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1, 2] | List of values for HTTP request duration     |
+| HTTP_SUMMARY_PERCENTILES  | [0.5, 0.9, 0.95, 0.99]                  | List of values for HTTP request percentiles  | 
 
 # Debug
 
