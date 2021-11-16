@@ -54,6 +54,8 @@ counter.inc(); // Increment by 1
 counter.inc(10); // Increment by 10
 ```
 
+The metrics system is exactly the same as in [prom-client](https://www.npmjs.com/package/prom-client) librairy.
+
 # Debug
 
 The agent use debug module in order not to pollute your logs.
