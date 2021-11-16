@@ -39,9 +39,9 @@ class APM {
         // prometheus stuff
         // --------------------------------------------------------------
         const collectDefaultMetrics = client.collectDefaultMetrics
-        collectDefaultMetrics()
+        collectDefaultMetrics(this.config['prom-client-conf'])
         this.server = http.createServer(requestListener)
-        this.server.listen(this.config.PORT || 9050)
+        this.server.listen(this.config.PORT || 9350)
     }
 
     destroy () {
