@@ -1,3 +1,5 @@
+const debug = require('debug')
+const error = debug('prometheus-middleware:error')
 const client = require('prom-client')
 const http = require('http')
 
@@ -10,7 +12,7 @@ const requestListener = async (req, res) => {
             res.writeHead(200, { 'Content-Type': client.register.contentType })
             return res.end(await client.register.metrics())
         } catch (ex) {
-            console.log(ex)
+            error(ex)
             res.writeHead(500, { 'Content-Type': 'text/html' })
             return res.end('Error')
         }
