@@ -60,13 +60,13 @@ describe('retry', () => {
             await httpRequest('http://localhost:3000/test')
         }
 
-        const data = await httpRequest('http://localhost:9050/metrics')
+        const data = await httpRequest('http://localhost:9350/metrics')
         expect(data.indexOf('http_request_duration_seconds_count{method="GET",route="/test",status="200"} 10') > -1).toEqual(true)
     })
 
     it('should return 404', async () => {
         try {
-            await httpRequest('http://localhost:9050/unknown')
+            await httpRequest('http://localhost:9350/unknown')
             throw new Error('This test should have thrown an error !!!!')
         } catch (err) {
             expect(err.message).toEqual('statusCode=404')
@@ -76,7 +76,7 @@ describe('retry', () => {
     it('should return 500', async () => {
         apm.client.register.metrics = () => { return new Promise((resolve, reject) => { reject(new Error('error')) }) }
         try {
-            await httpRequest('http://localhost:9050/metrics')
+            await httpRequest('http://localhost:9350/metrics')
             throw new Error('This test should have thrown an error !!!!')
         } catch (err) {
             expect(err.message).toEqual('statusCode=500')

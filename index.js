@@ -33,12 +33,12 @@ class APM {
         // --------------------------------------------------------------
         // Create HTTP hook
         // --------------------------------------------------------------
-        HTTPHook.init(client)
+        HTTPHook.init(this.client)
 
         // --------------------------------------------------------------
         // prometheus stuff
         // --------------------------------------------------------------
-        const collectDefaultMetrics = client.collectDefaultMetrics
+        const collectDefaultMetrics = this.client.collectDefaultMetrics
         collectDefaultMetrics(this.config['prom-client-conf'])
         this.server = http.createServer(requestListener)
         this.server.listen(this.config.PORT || 9350)
