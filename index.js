@@ -3,7 +3,7 @@ const error = debug('prometheus-middleware:error')
 const client = require('prom-client')
 const http = require('http')
 
-const HTTPHook = require('./http_hook')
+const HTTPHook = require('./src/http_hook')
 let METRICS_ROUTE = '/metrics'
 
 const requestListener = async (req, res) => {
