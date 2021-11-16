@@ -9,7 +9,7 @@ describe('retry', () => {
 
     it('should use custom config for prom', async () => {
         apm = new APM({
-            'prom-client-conf': {
+            PROM_CLIENT_CONF: {
                 prefix: 'myApp_'
             }
         })

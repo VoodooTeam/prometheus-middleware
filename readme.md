@@ -56,6 +56,26 @@ counter.inc(10); // Increment by 10
 
 The metrics system is exactly the same as in [prom-client](https://www.npmjs.com/package/prom-client) librairy.
 
+## Configuration
+
+The config is an JSON object which accepts the following property:
+
+```javascript
+const APM = require('prometheus-middleware')
+const apm = new APM({
+  METRICS_ROUTE: "Route to expose the metrics",
+  PORT: "Port to listen metrics",
+  PROM_CLIENT_CONF: "Configuration of the prom-client lib"
+})
+apm.init()
+```
+
+| Property          | Default       | Description                           |
+|:------------------|:--------------|:--------------------------------------|
+| METRICS_ROUTE     | /metrics      | Route to expose the metrics           |
+| PORT              | 9350          | Port to listen metrics                |
+| PROM_CLIENT_CONF  | {}            | Configuration of the prom-client lib  |     
+
 # Debug
 
 The agent use debug module in order not to pollute your logs.
