@@ -15,6 +15,7 @@ Supported and tested : >= 14.0
 
 | Version       | Supported     | Tested         |
 |:-------------:|:-------------:|:--------------:|
+| 12.x          | no            | yes            |
 | 14.x          | yes           | yes            |
 | 16.x          | yes           | yes            |
 
