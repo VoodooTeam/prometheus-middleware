@@ -32,6 +32,8 @@ It works with different HTTP server:
 - [express](https://expressjs.com/)
 - [fastify](https://www.fastify.io/)
 
+By default you can access your metrics on this endpoint: http://localhost:9350/metrics
+
 # Installation
 
 ```console
