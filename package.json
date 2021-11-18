@@ -18,6 +18,9 @@
   "keywords": [
     "apm",
     "prometheus",
+    "middleware",
+    "latency",
+    "handles",
     "eventloop",
     "gc",
     "cpu",
