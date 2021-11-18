@@ -10,7 +10,7 @@
 
 # Purpose
 
-Agent to create an HTTP server to expose prometheus metrics.  
+Mdule to create an HTTP server to expose prometheus metrics.  
 By default it:
 - runs an HTTP server to expose metrics
 - instantiates and returns a [prom-client](https://www.npmjs.com/package/prom-client)
@@ -78,6 +78,19 @@ const apm = new APM({
   HTTP_SUMMARY_PERCENTILES: [0.5, 0.9, 0.95, 0.99]
 })
 apm.init()
+```
+
+## Destroy the APM
+If you use a graceful exit method or if you want to simply stop the APM, you should run:
+
+```javascript
+const APM = require('prometheus-middleware')
+const apm = new APM()
+apm.init()
+
+process.on('SIGTERM', () => {
+  apm.destroy()
+})
 ```
 
 | Property                  | Default                                 | Description                                  |
