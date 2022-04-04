@@ -1,5 +1,6 @@
 'use strict'
 const Http = require('http')
+const { normalizeEndpoint } = require('./normalize/endpoint')
 
 const init = function (client, config) {
     const opts = {
@@ -31,7 +32,7 @@ const init = function (client, config) {
             res.on('finish', () => {
                 const labels = {
                     method: req.method,
-                    route: req.url,
+                    route: config.NORMALIZE_ENDPOINT ? normalizeEndpoint(req.url) : req.url,
                     status: res.statusCode
                 }
                 sum(labels)

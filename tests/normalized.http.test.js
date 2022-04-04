@@ -32,11 +32,13 @@ const httpRequest = (params) => {
     })
 }
 
-describe('retry', () => {
+describe('normalize', () => {
     let apm
     let app
     beforeAll((done) => {
-        apm = new APM()
+        apm = new APM({
+            NORMALIZE_ENDPOINT: true
+        })
         apm.init()
 
         app = require('fastify')()
@@ -68,42 +70,23 @@ describe('retry', () => {
         expect(data.indexOf('http_request_duration_seconds_count{method="GET",route="/test",status="200"} 10') > -1).toEqual(true)
     })
 
-    it('should expose http response time with id in the endpoint', async () => {
+    it('should expose http response time without ids', async () => {
         for (let i = 0; i < 10; i++) {
             await httpRequest('http://localhost:3000/test/1234')
         }
 
         const data = await httpRequest('http://localhost:9350/metrics')
         console.log(data)
-        expect(data.indexOf('http_request_duration_seconds_count{method="GET",route="/test/1234",status="200"} 10') > -1).toEqual(true)
+        expect(data.indexOf('http_request_duration_seconds_count{method="GET",route="/test/#value",status="200"} 10') > -1).toEqual(true)
     })
 
-    it('should expose http response time with query parameters', async () => {
+    it('should expose http response time without query parameters', async () => {
         for (let i = 0; i < 10; i++) {
             await httpRequest('http://localhost:3000/test/1234?thisQueryParameter=value')
         }
 
         const data = await httpRequest('http://localhost:9350/metrics')
         console.log(data)
-        expect(data.indexOf('http_request_duration_seconds_count{method="GET",route="/test/1234?thisQueryParameter=value",status="200"} 10') > -1).toEqual(true)
-    })
-
-    it('should return 404', async () => {
-        try {
-            await httpRequest('http://localhost:9350/unknown')
-            throw new Error('This test should have thrown an error !!!!')
-        } catch (err) {
-            expect(err.message).toEqual('statusCode=404')
-        }
-    })
-
-    it('should return 500', async () => {
-        apm.client.register.metrics = () => { return new Promise((resolve, reject) => { reject(new Error('error')) }) }
-        try {
-            await httpRequest('http://localhost:9350/metrics')
-            throw new Error('This test should have thrown an error !!!!')
-        } catch (err) {
-            expect(err.message).toEqual('statusCode=500')
-        }
+        expect(data.indexOf('http_request_duration_seconds_count{method="GET",route="/test/1234?thisQueryParameter=value",status="200"} 10') === -1).toEqual(true)
     })
 })
