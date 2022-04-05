@@ -76,7 +76,6 @@ describe('normalize', () => {
         }
 
         const data = await httpRequest('http://localhost:9350/metrics')
-        console.log(data)
         expect(data.indexOf('http_request_duration_seconds_count{method="GET",route="/test/#value",status="200"} 10') > -1).toEqual(true)
     })
 
@@ -86,7 +85,6 @@ describe('normalize', () => {
         }
 
         const data = await httpRequest('http://localhost:9350/metrics')
-        console.log(data)
         expect(data.indexOf('http_request_duration_seconds_count{method="GET",route="/test/1234?thisQueryParameter=value",status="200"} 10') === -1).toEqual(true)
     })
 })
