@@ -45,7 +45,7 @@ describe('normalize', () => {
         }
 
         const data = await httpRequest('http://localhost:9350/metrics')
-        expect(data.indexOf('http_request_duration_seconds_count{method="GET",route="/test/#value",status="200"} 10') > -1).toEqual(true)
+        expect(data.indexOf('http_request_duration_seconds_count{method="GET",route="/test/:id",status="200"} 10') > -1).toEqual(true)
     })
 
     it('should expose http response time without query parameters', async () => {
