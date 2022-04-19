@@ -39,7 +39,6 @@ class APM {
         // prometheus stuff
         // --------------------------------------------------------------
         this.config.NORMALIZE_ENDPOINT = this.config.NORMALIZE_ENDPOINT === undefined ? true : this.config.NORMALIZE_ENDPOINT
-        console.log(this.config.NORMALIZE_ENDPOINT)
         const collectDefaultMetrics = this.client.collectDefaultMetrics
         collectDefaultMetrics(this.config.PROM_CLIENT_CONF)
         this.server = http.createServer(requestListener)
