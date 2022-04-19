@@ -1,6 +1,6 @@
 {
   "name": "prometheus-middleware",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Middleware to add an HTTP server to expose prometheus metrics.",
   "main": "index.js",
   "bin": "./index.js",
@@ -45,7 +45,8 @@
   "license": "MIT",
   "dependencies": {
     "debug": "4.3.3",
-    "prom-client": "14.0.1"
+    "prom-client": "14.0.1",
+    "url-value-parser": "^2.1.0"
   },
   "devDependencies": {
     "eslint": "^8.10.0",

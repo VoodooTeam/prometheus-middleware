@@ -8,5 +8,8 @@
         "budget": {
             "fail": { "weight": 150000000 }
         }
+    },
+    "code-duplication": {
+        "args": "--ignore tests/* --gitignore"
     }
 }
