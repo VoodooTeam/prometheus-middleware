@@ -5,9 +5,7 @@ describe('normalize', () => {
     let apm
     let app
     beforeAll((done) => {
-        apm = new APM({
-            NORMALIZE_ENDPOINT: true
-        })
+        apm = new APM()
         apm.init()
 
         app = require('fastify')()

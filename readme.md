@@ -103,7 +103,7 @@ process.on('SIGTERM', () => {
 | PROM_CLIENT_CONF          | {}                                      | Configuration of the prom-client lib                        |
 | HTTP_DURATION_BUCKETS     | [0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1, 2] | List of values for HTTP request duration                    |
 | HTTP_SUMMARY_PERCENTILES  | [0.5, 0.9, 0.95, 0.99]                  | List of values for HTTP request percentiles                 | 
-| NORMALIZE_ENDPOINT        | false                                   | Normalize endpoint by occulting ids, and query parameters   | 
+| NORMALIZE_ENDPOINT        | true                                    | Normalize endpoint by occulting ids, and query parameters   | 
 
 To see how to use the module you can refer to the [example folder](https://github.com/VoodooTeam/prometheus-middleware/tree/master/example).
 

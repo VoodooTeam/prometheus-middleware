@@ -5,7 +5,9 @@ describe('retry', () => {
     let apm
     let app
     beforeAll((done) => {
-        apm = new APM()
+        apm = new APM({
+            NORMALIZE_ENDPOINT: false
+        })
         apm.init()
 
         app = require('fastify')()
@@ -43,6 +45,8 @@ describe('retry', () => {
         }
 
         const data = await httpRequest('http://localhost:9350/metrics')
+        console.log(data)
+        console.log(data.indexOf('http_request_duration_seconds_count{method="GET",route="/test/1234",status="200"} 10') > -1)
         expect(data.indexOf('http_request_duration_seconds_count{method="GET",route="/test/1234",status="200"} 10') > -1).toEqual(true)
     })
 
