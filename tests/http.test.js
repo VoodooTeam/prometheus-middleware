@@ -20,7 +20,7 @@ describe('retry', () => {
         app.get('/test/:id', async (request, reply) => {
             reply.send('OK')
         })
-        await app.listen({port: 3000})
+        await app.listen({ port: 3000 })
     })
 
     afterAll(() => {
