@@ -4,7 +4,7 @@ const { httpRequest } = require('./utils/httpRequest')
 describe('retry', () => {
     let apm
     let app
-    beforeAll((done) => {
+    beforeAll(async () => {
         apm = new APM({
             NORMALIZE_ENDPOINT: false
         })
@@ -20,9 +20,7 @@ describe('retry', () => {
         app.get('/test/:id', async (request, reply) => {
             reply.send('OK')
         })
-        app.listen(3000, () => {
-            done()
-        })
+        await app.listen({port: 3000})
     })
 
     afterAll(() => {
