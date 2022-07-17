@@ -6,15 +6,15 @@
 [![Code coverage](https://codecov.io/gh/VoodooTeam/prometheus-middleware/branch/master/graph/badge.svg)](https://codecov.io/gh/VoodooTeam/prometheus-middleware)
 [![Node version](https://img.shields.io/node/v-lts/prometheus-middleware.svg)](https://github.com/VoodooTeam/prometheus-middleware)
 
-# Node.js simple middleware to expose prometheus metrics
+# Node.js simple middleware to expose Prometheus metrics
 
 # Purpose
 
-Mdule to create an HTTP server to expose prometheus metrics.  
+Module to create an HTTP server to expose Prometheus metrics.  
 By default it:
 - runs an HTTP server to expose metrics
 - instantiates and returns a [prom-client](https://www.npmjs.com/package/prom-client)
-- patch http server to get request response time
+- patches http server to get request response time
 - allows to define custom metrics through prom-client
 
 # Compatibility
@@ -26,7 +26,7 @@ Supported and tested : >= 14.0
 | 14.x          | yes           | yes            |
 | 16.x          | yes           | yes            |
 
-It works with different HTTP server:
+It works with different HTTP servers:
 - [default Node.js HTTP server](https://nodejs.org/api/http.html#class-httpserver)
 - [express](https://expressjs.com/)
 - [fastify](https://www.fastify.io/)
