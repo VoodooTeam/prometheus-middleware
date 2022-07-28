@@ -26,6 +26,9 @@ class APM {
         this.config = config
         this.client = client
         this.server = null
+        if (!Object.prototype.hasOwnProperty.call(config, 'HTTPHook')) {
+            config.HTTPHook = true
+        }
     }
 
     init () {
@@ -33,7 +36,7 @@ class APM {
         // --------------------------------------------------------------
         // Create HTTP hook
         // --------------------------------------------------------------
-        HTTPHook.init(this.client, this.config)
+        if (this.config.HTTPHook) HTTPHook.init(this.client, this.config)
 
         // --------------------------------------------------------------
         // prometheus stuff
