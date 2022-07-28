@@ -5,7 +5,9 @@ describe('normalize', () => {
     let apm
     let app
     beforeAll(async () => {
-        apm = new APM()
+        apm = new APM({
+            PORT: 9351
+        })
         apm.init()
 
         app = require('fastify')()
@@ -18,7 +20,7 @@ describe('normalize', () => {
         app.get('/test/:id', async (request, reply) => {
             reply.send('OK')
         })
-        await app.listen({ port: 3000 })
+        await app.listen({ port: 3001 })
     })
 
     afterAll(async () => {
@@ -28,28 +30,28 @@ describe('normalize', () => {
 
     it('should expose http response time', async () => {
         for (let i = 0; i < 10; i++) {
-            await httpRequest('http://localhost:3000/test')
+            await httpRequest('http://localhost:3001/test')
         }
 
-        const data = await httpRequest('http://localhost:9350/metrics')
+        const data = await httpRequest('http://localhost:9351/metrics')
         expect(data.indexOf('http_request_duration_seconds_count{method="GET",route="/test",status="200"} 10') > -1).toEqual(true)
     })
 
     it('should expose http response time without ids', async () => {
         for (let i = 0; i < 10; i++) {
-            await httpRequest('http://localhost:3000/test/1234')
+            await httpRequest('http://localhost:3001/test/1234')
         }
 
-        const data = await httpRequest('http://localhost:9350/metrics')
+        const data = await httpRequest('http://localhost:9351/metrics')
         expect(data.indexOf('http_request_duration_seconds_count{method="GET",route="/test/:id",status="200"} 10') > -1).toEqual(true)
     })
 
     it('should expose http response time without query parameters', async () => {
         for (let i = 0; i < 10; i++) {
-            await httpRequest('http://localhost:3000/test/1234?thisQueryParameter=value')
+            await httpRequest('http://localhost:3001/test/1234?thisQueryParameter=value')
         }
 
-        const data = await httpRequest('http://localhost:9350/metrics')
+        const data = await httpRequest('http://localhost:9351/metrics')
         expect(data.indexOf('http_request_duration_seconds_count{method="GET",route="/test/1234?thisQueryParameter=value",status="200"} 10') === -1).toEqual(true)
     })
 })
