@@ -23,9 +23,9 @@ describe('retry', () => {
         await app.listen({ port: 3000 })
     })
 
-    afterAll(() => {
-        apm.destroy()
-        app.close()
+    afterAll(async () => {
+        await apm.destroy()
+        await app.close()
     })
 
     it('should expose http response time', async () => {
@@ -34,6 +34,7 @@ describe('retry', () => {
         }
 
         const data = await httpRequest('http://localhost:9350/metrics')
+        console.log(data)
         expect(data.indexOf('http_request_duration_seconds_count{method="GET",route="/test",status="200"} 10') > -1).toEqual(true)
     })
 

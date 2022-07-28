@@ -4,7 +4,7 @@ const { httpRequest } = require('./utils/httpRequest')
 describe('normalize', () => {
     let apm
     let app
-    beforeAll((done) => {
+    beforeAll(async () => {
         apm = new APM()
         apm.init()
 
@@ -18,14 +18,12 @@ describe('normalize', () => {
         app.get('/test/:id', async (request, reply) => {
             reply.send('OK')
         })
-        app.listen(3000, () => {
-            done()
-        })
+        await app.listen({ port: 3000 })
     })
 
-    afterAll(() => {
-        apm.destroy()
-        app.close()
+    afterAll(async () => {
+        await apm.destroy()
+        await app.close()
     })
 
     it('should expose http response time', async () => {
