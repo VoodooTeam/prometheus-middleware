@@ -52,7 +52,7 @@ describe('retry', () => {
         }
 
         const data = await httpRequest('http://localhost:9350/metrics')
-        expect(data.indexOf('http_request_duration_seconds_count{method="GET",route="/test/1234?thisQueryParameter=value",status="200"} 10') > -1).toEqual(true)
+        expect(data.indexOf('http_request_duration_seconds_count{method="GET",route="/test/1234",status="200"} 20') > -1).toEqual(true)
     })
 
     it('should return 404', async () => {

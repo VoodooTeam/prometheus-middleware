@@ -30,9 +30,11 @@ const init = function (client, config) {
             const sum = routeSum.startTimer()
 
             res.on('finish', () => {
+                const url = new URL('http://' + req.headers.host + req.url)
+                const urlPath = url.pathname
                 const labels = {
                     method: req.method,
-                    route: config.NORMALIZE_ENDPOINT ? normalizeEndpoint(req.url) : req.url,
+                    route: config.NORMALIZE_ENDPOINT ? normalizeEndpoint(req.url) : urlPath,
                     status: res.statusCode
                 }
                 sum(labels)
