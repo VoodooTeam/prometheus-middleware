@@ -23,7 +23,6 @@ Supported and tested : >= 14.0
 
 | Version       | Supported     | Tested         |
 |:-------------:|:-------------:|:--------------:|
-| 14.x          | yes           | yes            |
 | 16.x          | yes           | yes            |
 | 18.x          | yes           | yes            |
 
