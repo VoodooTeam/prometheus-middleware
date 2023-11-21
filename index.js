@@ -9,8 +9,9 @@ let METRICS_ROUTE = '/metrics'
 const requestListener = async (req, res) => {
     if (req.url === METRICS_ROUTE) {
         try {
+            const data = await client.register.metrics()
             res.writeHead(200, { 'Content-Type': client.register.contentType })
-            return res.end(await client.register.metrics())
+            return res.end(data)
         } catch (ex) {
             error(ex)
             res.writeHead(500, { 'Content-Type': 'text/html' })
