@@ -25,6 +25,7 @@ Supported and tested : >= 14.0
 |:-------------:|:-------------:|:--------------:|
 | 16.x          | yes           | yes            |
 | 18.x          | yes           | yes            |
+| 20.x          | yes           | yes            |
 
 It works with different HTTP servers:
 - [default Node.js HTTP server](https://nodejs.org/api/http.html#class-httpserver)
