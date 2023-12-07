@@ -15,6 +15,6 @@ describe('retry', () => {
         })
         apm.init()
         const data = await apm.client.register.metrics()
-        expect(data.indexOf('TYPE myApp_process_cpu_user_seconds_total counter') > -1).toEqual(true)
+        expect(data.indexOf('TYPE myApp_process_cpu_user_seconds counter') > -1).toEqual(true)
     })
 })

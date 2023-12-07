@@ -1,6 +1,7 @@
 'use strict'
 const Http = require('http')
 const { normalizeEndpoint } = require('./normalize/endpoint')
+const opentelemetry = require('@opentelemetry/api')
 
 const init = function (client, config) {
     const opts = {
@@ -8,6 +9,7 @@ const init = function (client, config) {
             name: 'http_request_duration_seconds',
             help: 'request duration in seconds',
             labelNames: ['status', 'method', 'route'],
+            enableExemplars: true,
             buckets: config.HTTP_DURATION_BUCKETS || [0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1, 2]
         },
         summary: {
@@ -21,13 +23,14 @@ const init = function (client, config) {
     const routeHist = new client.Histogram(opts.histogram)
     const routeSum = new client.Summary(opts.summary)
 
+    const exemplarLabels = {}
+
     const emit = Http.Server.prototype.emit
     Http.Server.prototype.emit = function (type) {
         if (type === 'request') {
             const [req, res] = [arguments[1], arguments[2]]
 
-            const hist = routeHist.startTimer()
-            const sum = routeSum.startTimer()
+            const start = process.hrtime()
 
             res.on('finish', () => {
                 const url = new URL('http://' + req.headers.host + req.url)
@@ -37,8 +40,16 @@ const init = function (client, config) {
                     route: config.NORMALIZE_ENDPOINT ? normalizeEndpoint(req.url) : urlPath,
                     status: res.statusCode
                 }
-                sum(labels)
-                hist(labels)
+
+                const spanContext = opentelemetry.trace.getSpanContext(opentelemetry.context.active())
+                const traceId = spanContext && spanContext.traceId
+                exemplarLabels.traceID = traceId
+
+                const delta = process.hrtime(start)
+                const value = delta[0] + delta[1] / 1e9
+
+                routeSum.observe(value)
+                routeHist.observe({ labels, value, exemplarLabels })
             })
         }
         return emit.apply(this, arguments)

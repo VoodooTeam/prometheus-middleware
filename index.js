@@ -6,6 +6,10 @@ const http = require('http')
 const HTTPHook = require('./src/http_hook')
 let METRICS_ROUTE = '/metrics'
 
+client.register.setContentType(
+    client.Registry.OPENMETRICS_CONTENT_TYPE
+)
+
 const requestListener = async (req, res) => {
     if (req.url === METRICS_ROUTE) {
         try {
