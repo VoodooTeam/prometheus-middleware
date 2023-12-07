@@ -1,6 +1,6 @@
 {
   "name": "prometheus-middleware",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Middleware to add an HTTP server to expose prometheus metrics.",
   "main": "index.js",
   "bin": "./index.js",
