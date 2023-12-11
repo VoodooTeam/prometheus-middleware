@@ -34,6 +34,9 @@ class APM {
         if (!Object.prototype.hasOwnProperty.call(config, 'HTTPHook')) {
             config.HTTPHook = true
         }
+        if (!Object.prototype.hasOwnProperty.call(config, 'enableExemplars')) {
+            config.enableExemplars = true
+        }
     }
 
     init () {

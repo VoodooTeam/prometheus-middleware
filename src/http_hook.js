@@ -9,7 +9,7 @@ const init = function (client, config) {
             name: 'http_request_duration_seconds',
             help: 'request duration in seconds',
             labelNames: ['status', 'method', 'route'],
-            enableExemplars: true,
+            enableExemplars: config.enableExemplars,
             buckets: config.HTTP_DURATION_BUCKETS || [0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1, 2]
         },
         summary: {
@@ -49,7 +49,12 @@ const init = function (client, config) {
                 const value = delta[0] + delta[1] / 1e9
 
                 routeSum.observe(value)
-                routeHist.observe({ labels, value, exemplarLabels })
+
+                if (config.enableExemplars) {
+                    routeHist.observe({ labels, value, exemplarLabels })
+                } else {
+                    routeHist.observe(labels, value)
+                }
             })
         }
         return emit.apply(this, arguments)
