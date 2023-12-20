@@ -48,7 +48,7 @@ const init = function (client, config) {
                 const delta = process.hrtime(start)
                 const value = delta[0] + delta[1] / 1e9
 
-                routeSum.observe(value)
+                routeSum.observe(labels, value)
 
                 if (config.enableExemplars) {
                     routeHist.observe({ labels, value, exemplarLabels })
