@@ -41,6 +41,10 @@ const init = function (client, config) {
                     status: res.statusCode
                 }
 
+                if (res.statusCode === 404) {
+                    labels.route = '/404' // avoid high cardinality in case of remote attack
+                }
+
                 const spanContext = opentelemetry.trace.getSpanContext(opentelemetry.context.active())
                 const traceId = spanContext && spanContext.traceId
                 exemplarLabels.traceID = traceId

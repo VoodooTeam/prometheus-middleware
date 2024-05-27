@@ -34,6 +34,9 @@ It works with different HTTP servers:
 
 By default you can access your metrics on this endpoint: http://localhost:9350/metrics
 
+In order to handle remote attack and to avoid high cardinality, the default behavior of this lib is to
+override the `path` label in case of HTTP code 404.
+
 # Installation
 
 ```console

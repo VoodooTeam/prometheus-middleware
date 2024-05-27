@@ -55,6 +55,16 @@ describe('retry', () => {
         expect(data.indexOf('http_request_duration_seconds_count{method="GET",route="/test/1234",status="200"} 20') > -1).toEqual(true)
     })
 
+    it('should handle 404', async () => {
+        try {
+            await httpRequest('http://localhost:3000/unknown')
+        } catch (err) {
+            expect(err.message).toEqual('statusCode=404')
+            const data = await httpRequest('http://localhost:9350/metrics')
+            expect(data.indexOf('http_request_duration_seconds_count{method="GET",route="/404",status="404"}') > -1).toEqual(true)
+        }
+    })
+
     it('should return 404', async () => {
         try {
             await httpRequest('http://localhost:9350/unknown')
