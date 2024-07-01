@@ -1,0 +1,3 @@
+{
+  "extends": ["github>VoodooTeam/renovate-config:npm"]
+}
