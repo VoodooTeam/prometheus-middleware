@@ -50,7 +50,7 @@ class APM {
         // prometheus stuff
         // --------------------------------------------------------------
         this.config.NORMALIZE_ENDPOINT = this.config.NORMALIZE_ENDPOINT === undefined ? true : this.config.NORMALIZE_ENDPOINT
-        if ([1, true, 'true', 'on', 'yes', undefined].indexOf(this.config.COLLECT_DEFAULT_METRICS) >= 0 ) {
+        if ([1, true, 'true', 'on', 'yes', undefined].indexOf(this.config.COLLECT_DEFAULT_METRICS) >= 0) {
             const collectDefaultMetrics = this.client.collectDefaultMetrics
             collectDefaultMetrics(this.config.PROM_CLIENT_CONF)
         }
