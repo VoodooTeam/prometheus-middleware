@@ -1,3 +1,4 @@
 {
-  "extends": ["github>VoodooTeam/renovate-config:npm"]
+  "extends": ["github>VoodooTeam/renovate-config:npm"],
+  "schedule": ["after 8am and before 7pm every weekday"],
 }
